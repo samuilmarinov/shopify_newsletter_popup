@@ -1,0 +1,68 @@
+<!– Newsletter Popup START –>
+<link rel=”stylesheet” href=”https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css” media=”screen”>
+<script src=”https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js”></script>
+<script src=”https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js”></script>
+<style>#popupbutton:hover{background: black; color:#eddb5d; border: 0; padding: 5px 15px;} #popupbutton{background: #eddb5d; border: 0; padding: 5px 15px;}#newsletterEmail{margin-top: 15px; margin-bottom: 15px;}#targetpop{text-align: center;}</style>
+
+<a style=”display:none;” id=”various1″ href=”#targetpop”></a>
+<div style=”display: none;”>
+<div id=”targetpop” class=”newsletter outer relative pv1 ts1″>
+<div class=”absolute fit-x”>
+<div class=”gradient-background absolute fit-x bg-c1″></div>
+</div>
+
+<div class=”container–s mha relative tsx mv1″>
+<div class=”newsletter__inner mha w1 flex flex-items-center flex-wrap”>
+
+<div class=”newsletter__title mb1 pb05 w1 w12_m cw align-c”>
+<h3 class=”mv0″>LA BREWERY NEWSLETTER</h3>
+<p class=”mv0″>News, Stockists, Mocktails & More…</p>
+</div>
+
+<div class=”w1 w12_m” data-component=”newsletter-form”>
+<div id=”newsletterSuccess” class=”newsletter__success hide cw fit-x p”>Thanks for signing up!</div>
+
+{% form ‘customer’ %}
+{% if form.posted_successfully? %}
+<div id=”newsletterSuccess” class=”newsletter__success cw mv05″>
+<p>Thank you for signing up!</p>
+</div>
+{% else %}
+<div class=”flex flex-items-start”>
+<div class=”newsletter__field flex-auto”>
+<input id=”newsletterEmail” class=”w1″ name=”contact[email]” type=”email”
+placeholder=”Email Address” required
+value=”{% if customer %}{{ customer.email }}{% endif %}” autocorrect=”off”
+autocapitalize=”off”>
+</div>
+
+<button type=”submit” id=”popupbutton” class=”button button–dark”>Sign Up</button>
+</div>
+{% if form.errors %}
+<p class=”newsletter__error align-c c3 mt05″>*Invalid email address, try again.</p>
+{% endif %}
+{% endif %}
+{% endform %}
+</div>
+
+</div>
+</div>
+</div>
+</div>
+
+<script type=”text/javascript”>
+function openFancybox() {
+setTimeout( function() {$(‘#various1’).trigger(‘click’); },10000);
+}
+$(document).ready(function() {
+var visited = $.cookie(‘visitedPopup4’);
+if (visited == ‘yes’) {
+return false;
+} else {
+openFancybox();
+}
+$.cookie(‘visitedPopup4’, ‘yes’, { expires: 7 });
+$(‘#various1’).fancybox();
+});
+</script>
+<!– Newsletter Popup END –>
